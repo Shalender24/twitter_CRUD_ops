@@ -1,0 +1,95 @@
+import time
+from selenium import webdriver
+from selenium.webdriver.chrome.service import Service as ChromeService
+from webdriver_manager.chrome import ChromeDriverManager
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+
+
+driver=webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()))
+
+#READ
+def read_tweets():
+    driver.get("https://x.com/i/flow/login")
+
+    username="dummysingh26"
+    password="Internship2024@"
+    # username enter 
+    WebDriverWait(driver, 10).until(EC.visibility_of_element_located((By.NAME,'text'))).send_keys(username)
+
+    # click
+    WebDriverWait(driver, 10).until(EC.element_to_be_clickable((By.XPATH, "//span[text()='Next']"))).click()
+
+    #email enter
+    # WebDriverWait(driver, 10).until(EC.visibility_of_element_located((By.XPATH,"//input[@data-testid='ocfEnterTextTextInput']"))).send_keys("shalenderbhandari91@gmail.com")
+
+    # click
+    # WebDriverWait(driver, 10).until(EC.element_to_be_clickable((By.XPATH,"//span[contains(text(), 'Next')]"))).click()
+
+    # password enter 
+    WebDriverWait(driver, 10).until(EC.visibility_of_element_located((By.XPATH, "//div/input[@name='password']"))).send_keys(password)
+
+    # click
+    WebDriverWait(driver, 10).until(EC.element_to_be_clickable((By.XPATH,"//span[contains(text(), 'Log in')]"))).click()
+
+    WebDriverWait(driver, 10).until(EC.element_to_be_clickable((By.CSS_SELECTOR, 'a[aria-label="Profile"]'))).click()
+    tweets = driver.find_elements(
+                    "xpath", '//article[@data-testid="tweet"]'
+                )
+    for tweet in tweets:
+        print(tweet)
+
+#DELETE
+def delete():
+    driver.get("https://x.com/i/flow/login")
+
+    username="dummysingh26"
+    password="Internship2024@"
+    # username enter 
+    WebDriverWait(driver, 10).until(EC.visibility_of_element_located((By.NAME,'text'))).send_keys(username)
+
+    # click
+    WebDriverWait(driver, 10).until(EC.element_to_be_clickable((By.XPATH, "//span[text()='Next']"))).click()
+
+    # password enter 
+    WebDriverWait(driver, 10).until(EC.visibility_of_element_located((By.XPATH, "//div/input[@name='password']"))).send_keys(password)
+
+    # click
+    WebDriverWait(driver, 10).until(EC.element_to_be_clickable((By.XPATH,"//span[contains(text(), 'Log in')]"))).click()
+    WebDriverWait(driver, 10).until(EC.element_to_be_clickable((By.CSS_SELECTOR, 'a[aria-label="Profile"]'))).click()
+
+
+    WebDriverWait(driver, 10).until(EC.element_to_be_clickable((By.XPATH, "//body/div[@id='react-root']/div[@class='css-175oi2r r-13awgt0 r-12vffkv']/div[@class='css-175oi2r r-13awgt0 r-12vffkv']/div[@class='css-175oi2r r-1f2l425 r-13qz1uu r-417010 r-18u37iz']/main[@role='main']/div[@class='css-175oi2r r-150rngu r-16y2uox r-1wbh5a2 r-1oszu61 r-13qz1uu']/div[@class='css-175oi2r r-aqfbo4 r-16y2uox']/div[@class='css-175oi2r r-1oszu61 r-1niwhzg r-18u37iz r-16y2uox r-2llsf r-13qz1uu r-f8sm7e']/div[@class='css-175oi2r r-kemksi r-1ua6aaf r-th6na r-1phboty r-16y2uox r-184en5c r-42olwf r-f8sm7e r-13qz1uu']/div[@aria-label='Home timeline']/div[@class='css-175oi2r']/div[@class='css-175oi2r r-16y2uox']/div[@class='css-175oi2r r-f8sm7e r-13qz1uu']/section[@role='region']/div[@aria-label='Timeline: Dummy singh’s posts']/div/div[4]/div[1]/div[1]/article[1]/div[1]/div[1]/div[2]/div[2]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/button[1]/div[1]/div[1]//*[name()='svg']"))).click()
+    WebDriverWait(driver, 10).until(EC.element_to_be_clickable((By.XPATH,"//body//div[@id='react-root']//div[@id='layers']//div[@class='css-175oi2r']//div[@class='css-175oi2r']//div[1]//div[2]//div[1]"))).click()
+
+    
+    WebDriverWait(driver, 10).until(EC.element_to_be_clickable((By.XPATH,"//body//div[@id='react-root']//div[@id='layers']//div[@class='css-175oi2r']//div[@class='css-175oi2r']//div[1]//div[2]//div[1]"))).click()
+
+
+#CREATE
+def postOnline(text):
+    driver.get("https://x.com/i/flow/login")
+
+    username="dummysingh26"
+    password="Internship2024@"
+    # username enter 
+    WebDriverWait(driver, 10).until(EC.visibility_of_element_located((By.NAME,'text'))).send_keys(username)
+
+    # click
+    WebDriverWait(driver, 10).until(EC.element_to_be_clickable((By.XPATH, "//span[text()='Next']"))).click()
+
+    # password enter 
+    WebDriverWait(driver, 10).until(EC.visibility_of_element_located((By.XPATH, "//div/input[@name='password']"))).send_keys(password)
+
+    # click
+    WebDriverWait(driver, 10).until(EC.element_to_be_clickable((By.XPATH,"//span[contains(text(), 'Log in')]"))).click()
+
+    #enter text
+    WebDriverWait(driver,10).until(EC.visibility_of_element_located((By.CSS_SELECTOR, '[aria-label="Post text"]'))).send_keys(text)
+    
+    #click on post
+    WebDriverWait(driver,10).until(EC.element_to_be_clickable((By.XPATH, "//span[contains(text(), 'Post')]"))).click()
+
+
+time.sleep(10)
